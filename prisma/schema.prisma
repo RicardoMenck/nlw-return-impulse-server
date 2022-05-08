@@ -1,0 +1,27 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+//O Prisma cria uma tabela no banco de dados chamada (feedbacks)
+model Feedback {
+  //Colunas que haverão
+  //@id é uma PRIME KEY, precisa de ao menos uma para funcionar
+  id String @id @default(uuid())
+
+  type       String
+  comment    String
+  //Ao acrescentar a interrogação(?) no final, você indica ao banco de dados que essa Coluna pode receber o valor nulo(null)
+  screenshot String?
+
+
+  //Cria a tabela com o nome desejado => @@map("String(nome)")
+  @@map("feedbacks")
+}
